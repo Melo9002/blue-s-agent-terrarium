@@ -11,9 +11,8 @@ class MockProvider:
         urgent = event.importance >= 0.8
         return Reaction(
             should_speak=True,
-            text=f'{inhabitant.name} observed \"{observed}\" and wants to respond.',
+            text=f'{inhabitant.name} observed "{observed}" and wants to respond.',
             emotion="surprised" if urgent else "curious",
             animation="react" if urgent else None,
             memory_candidates=[],
         )
-

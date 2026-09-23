@@ -1,67 +1,29 @@
-# At-home provider check
+# At-home verification
 
-The project can be tested with a hosted Groq model or a local Ollama model. Keep
-real keys only in `.env`.
-
-## Groq
-
-1. Copy `.env.example` to `.env`.
-2. Set:
-
-```env
-AGENT_PROVIDER=groq
-GROQ_API_KEY=your_key
-GROQ_MODEL=openai/gpt-oss-20b
-```
-
-3. Run:
+From the repository root after installing uv:
 
 ```powershell
-node src/check-provider.js
+uv sync --python 3.13
+uv run python --version
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
 ```
 
-A successful check prints one short PixiHex reaction and reports `provider:
-'groq'`.
+Python should report 3.13.x, all tests should pass, and Ruff should report no
+errors. Python 3.14 is also supported when selected explicitly.
 
-## Ollama
-
-1. Install Ollama and run:
+Run the current offline prototype:
 
 ```powershell
-ollama run qwen3:1.7b
+uv run agent-terrarium
 ```
 
-2. Set `.env`:
+Type `Hi`, verify that PixiHex and Basilisk produce mock responses, then type
+`quit`. Mock requires no internet connection or API credits.
 
-```env
-AGENT_PROVIDER=ollama
-OLLAMA_MODEL=qwen3:1.7b
-OLLAMA_BASE_URL=http://localhost:11434
-```
+## Future local-model check
 
-3. Run:
+Ollama is not connected to the active Python implementation yet. After its
+Python adapter exists, this page will document the supported model and test.
 
-```powershell
-node src/check-provider.js
-```
-
-A successful check prints one short PixiHex reaction and reports `provider:
-'ollama'`.
-
-## Interactive check
-
-After the provider check succeeds:
-
-```powershell
-node src/index.js
-```
-
-Type `Hi`, inspect both reactions, and type `quit` to exit.
-
-## Return to offline mode
-
-```env
-AGENT_PROVIDER=mock
-```
-
-No key is needed in mock mode.

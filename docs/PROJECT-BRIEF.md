@@ -1,51 +1,69 @@
-# Agent Studio project brief
+# Blue's Agent Terrarium project brief
 
-## Vision
+## Product statement
 
-Build a desktop-first platform for persistent AI characters. PixiHex and
-Basilisk can both talk, react to games, code, draw, research, use avatars, and
-work independently within explicit limits.
+Blue's Agent Terrarium is a local-first, cross-platform desktop habitat for
+persistent AI characters. An inhabitant retains its identity while moving
+between conversation, live-companion, task, and bounded free-time modes.
+
+PixiHex and Basilisk-chan are inhabitants, not separate applications or fixed
+agent classes. Either may eventually talk, code, draw, research, react to games,
+use an avatar, sing, or connect to another device when the corresponding module
+and permission are available.
+
+## Product shape
+
+BAT is a native Python application using Python 3.13/3.14, uv, PySide6,
+Pydantic, HTTPX, SQLite, pytest, and Ruff. It begins as one modular-monolith
+desktop process. The primary host stays local because it will eventually reach
+files, Git, microphones, games, avatars, GPUs, and streaming software.
 
 ## Core decisions
 
-- One shared platform, not two disconnected applications.
-- Characters are profiles with identity, memory, tools, and permissions.
-- Any character can use conversation, reactive, task, or free-time mode.
-- All external input is normalized into typed events.
-- Model, voice, image, avatar, and game integrations use replaceable adapters.
-- Local deterministic logic controls timing, permissions, budgets, and safety.
-- Models provide language, planning, interpretation, and creative output.
-- Begin with a mock provider before spending API credits.
+- Build one shared habitat, not separate applications per character.
+- Separate inhabitants from capabilities, senses, expressions, and bodies.
+- Normalize external input into typed events.
+- Keep model, voice, image, avatar, and game integrations behind adapters.
+- Use deterministic code for permissions, timing, queues, budgets, and safety.
+- Use models for language, interpretation, planning, and creative work.
+- Keep each inhabitant's history, memories, goals, and permissions isolated.
+- Keep a mock provider for offline development and automated tests.
+- Extract general module contracts only after real modules reveal the seams.
 
-## Initial milestones
+## Module families
 
-1. Terminal event demo with two character profiles and a mock provider.
-2. Real text model adapter with structured responses.
-3. SQLite run history and memory.
-4. Local browser dashboard.
-5. Voice and VTube Studio integration.
-6. One real game connector.
-7. Sandboxed coding and image generation tools.
-8. Scheduled free-time runtime with approval gates and budgets.
+1. **Input connectors** emit events from games, chat, microphones, schedules,
+   files, or hardware.
+2. **Capabilities** perform work such as coding, drawing, or research.
+3. **Expression modules** render intent as text, speech, singing, or motion.
+4. **Embodiment bridges** connect inhabitants to other hosts or devices while
+   leaving hardware safety to a local controller.
 
-## Permission levels
+## Permission model
 
-- Allow: read approved files, research, create drafts, use a sandbox.
-- Ask: modify real projects, commit code, spend beyond limits, send messages.
-- Deny by default: publish, delete important data, expose credentials, spend money.
+- **Allow:** read approved files, research, create drafts, and use a sandbox.
+- **Ask:** modify real projects, run consequential commands, commit code, spend
+  beyond a budget, or communicate externally.
+- **Deny by default:** expose credentials, delete important data, spend money,
+  publish, or directly control unsafe hardware.
+
+## First user journey
+
+1. Start the native Terrarium application.
+2. Select Basilisk-chan and type `Hi`.
+3. Receive text, emotion, animation intent, and a speaking decision.
+4. Switch from Mock to Ollama without changing Basilisk or the UI.
+5. Restart and recover separate history and approved memory.
 
 ## Current state
 
-Lesson 1 is implemented in `src/`. It has no dependencies and demonstrates:
+The Python foundation provides validated models, PixiHex and Basilisk profiles,
+an importance-filtering runtime, a provider protocol, an offline mock provider,
+a terminal loop, and passing tests. The Node/browser prototype remains
+recoverable from commit `eb32a35` (`the great python reset`).
 
-- a common event schema;
-- shared capabilities through character profiles;
-- reaction thresholds;
-- a provider boundary; and
-- important events versus ignored noise.
+## Immediate objective
 
-## Next implementation task
+Create the first PySide6 window and connect it to the existing runtime and mock
+provider. The milestone ends when Basilisk can answer `Hi` without the terminal.
 
-Add a provider-neutral structured result schema, then implement one real model
-adapter selected through environment variables. Keep the mock provider for free
-development and automated checks.

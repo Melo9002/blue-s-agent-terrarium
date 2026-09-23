@@ -1,6 +1,5 @@
 from agent_terrarium.models import InhabitantProfile
 
-
 INHABITANTS: dict[str, InhabitantProfile] = {
     "pixihex": InhabitantProfile(
         id="pixihex",

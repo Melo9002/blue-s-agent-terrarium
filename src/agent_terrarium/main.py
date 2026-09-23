@@ -20,7 +20,9 @@ def run() -> None:
         if not text or text.lower() == "quit":
             break
 
-        event = Event(type="user.message", source="terminal", importance=0.7, payload={"text": text})
+        event = Event(
+            type="user.message", source="terminal", importance=0.7, payload={"text": text}
+        )
         for inhabitant in INHABITANTS.values():
             result = runtime.handle(inhabitant, event)
             if result.reaction:
@@ -31,4 +33,3 @@ def run() -> None:
 
 if __name__ == "__main__":
     run()
-

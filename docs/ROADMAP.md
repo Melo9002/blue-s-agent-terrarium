@@ -1,182 +1,108 @@
 # Roadmap
 
-## First final form: v0.1 — First Habitat
+`TASKS.md` is the active work board. This document describes the larger product
+sequence and the observable result that completes each milestone.
 
-The first complete version is a local application in which PixiHex and Basilisk
-can hold a real text conversation, remember a few approved facts, react to a
-stream of game-like events, speak through a local voice, and drive expressions
-on one Live2D avatar. The model can be switched between a free online Gemini
-adapter and a local Ollama adapter without changing either character.
+## Milestone 0 — Python foundation
 
-This version is complete when someone can clone the repository, configure one
-provider, open the local interface, select an inhabitant, say hello, send or
-receive a game event, and see the character decide whether to respond, speak,
-and emote. The session and its memories must still be present after restarting
-the application.
+- uv-managed Python 3.13/3.14 project
+- Validated domain models and structured reactions
+- PixiHex and Basilisk profiles
+- Provider-neutral interface and offline mock provider
+- Importance filtering, terminal smoke test, tests, linting, and formatting
+- Native-Python documentation with the Node prototype removed
 
-### v0.1 user journey
+**Exit:** A fresh clone passes the checks and runs `uv run agent-terrarium`.
 
-1. Start the local host.
-2. Open the Terrarium interface in a browser.
-3. Select PixiHex, Basilisk, or both.
-4. Select Mock, Gemini, or Ollama as the model provider.
-5. Send a message and receive a character-specific response.
-6. Send a simulated event or start the first supported game connector.
-7. Watch the runtime suppress noise and react to an important event.
-8. Hear the response through local text-to-speech.
-9. See the selected VTube Studio expression trigger.
-10. Restart the application and continue with saved history and approved memory.
+## Milestone 1 — Basilisk awakens
 
-## Milestone 0 — Executable core
+- Native PySide6 application shell and inhabitant selector
+- Transcript, message box, and Send action
+- Provider work outside the UI thread
+- Mock provider connected end to end
+- Visible emotion, animation intent, and errors
+- Initial Basilisk identity and behavior profile
 
-- [x] Create PixiHex and Basilisk profiles.
-- [x] Define the common event envelope.
-- [x] Add importance thresholds.
-- [x] Add a mock provider.
-- [x] Add terminal demo and interactive input.
-- [x] Test important-event delivery and noise suppression.
-- [x] Define and validate a structured reaction result:
-  `shouldSpeak`, `text`, `emotion`, `animation`, and `memoryCandidates`.
-- [ ] Separate character profiles from source code into validated data files.
-- [ ] Add clear runtime errors for malformed profiles, events, and provider output.
+**Exit:** Select Basilisk, type `Hi`, and see her response in the native window.
 
-**Exit:** Mock events produce validated, predictable reactions for either
-inhabitant.
+## Milestone 2 — First real model
 
-## Milestone 1 — Real model gateway
+- Python Ollama adapter and validated provider settings
+- Timeouts, cancellation, connection errors, and safe output validation
+- Provider, model, and latency metadata
+- Mock retained for tests and offline use
 
-- [x] Define a provider-neutral model interface.
-- [x] Select providers through environment configuration.
-- [x] Add Groq for free hosted development.
-- [ ] Add Gemini Flash Lite as another free online option.
-- [x] Add Ollama for free local development.
-- [x] Keep the mock provider available offline and in tests.
-- [x] Add timeouts, cancellation, and useful connection errors.
-- [x] Keep API keys exclusively in ignored environment files.
-- [ ] Record provider, model, latency, and token information when available.
+**Exit:** Configuration switches a conversation between Mock and Ollama without
+changing the UI, runtime, or inhabitant profile.
 
-**Exit:** The same event can be answered by Mock, Gemini, or Ollama without
-changing the runtime or character profile.
+## Milestone 3 — Basilisk remembers
 
-## Milestone 2 — Conversation and persistence
+- Automatic SQLite setup in a platform-appropriate data directory
+- Separate sessions, messages, reactions, and histories per inhabitant
+- Restored history and reviewable memory candidates
+- Accept, edit, reject, and delete controls with provenance and confidence
 
-- [ ] Add SQLite with automatic local setup.
-- [ ] Store inhabitants, sessions, events, messages, reactions, and run metadata.
-- [ ] Restore recent conversation after a restart.
-- [ ] Add explicit memory candidates rather than saving every message as memory.
-- [ ] Let the user accept, edit, or reject proposed long-term memories.
-- [ ] Store memory provenance and confidence.
-- [ ] Support deletion of a session or memory.
+**Exit:** Basilisk remembers an approved fact after restart without leaking it
+into PixiHex's memory.
 
-**Exit:** Each inhabitant maintains separate history and approved memories across
-restarts.
+## Milestone 4 — PixiHex joins the workshop
 
-## Milestone 3 — Terrarium interface
+- Independent PixiHex identity, conversation, and memory
+- Read-only project, directory-tree, file, and Git-status inspection
+- Visible tool activity and an approval boundary before modification
 
-- [ ] Add a local HTTP server and browser interface.
-- [ ] Show inhabitant cards with current status and selected provider.
-- [ ] Add text chat with one inhabitant or both.
-- [ ] Show incoming events and whether each inhabitant ignored or answered them.
-- [ ] Add pause, mute, and stop controls.
-- [ ] Add profile editing for identity, speaking style, and reaction threshold.
-- [ ] Add provider health and configuration status without revealing secrets.
-- [ ] Show basic latency and usage information.
+**Exit:** PixiHex can inspect and explain a project without changing it.
 
-**Exit:** Normal use no longer requires the terminal, while logs remain available
-for diagnosis.
+## Milestone 5 — Voice and avatar expression
 
-## Milestone 4 — Live character output
+- Expression-module boundary derived from text and speech
+- Local text-to-speech, queue, interruption, and mute controls
+- Emotion mapping and VTube Studio connection
+- Graceful offline behavior and per-inhabitant settings
 
-- [ ] Define voice and avatar adapter interfaces.
-- [ ] Add a free local or operating-system text-to-speech adapter.
-- [ ] Add a speech queue and prevent overlapping lines.
-- [ ] Map structured emotions to expressions.
-- [ ] Connect to the VTube Studio WebSocket API.
-- [ ] Trigger configured Live2D expressions or hotkeys.
-- [ ] Add connection tests and graceful behavior when VTube Studio is closed.
-- [ ] Add per-inhabitant voice and avatar settings.
+**Exit:** A reaction appears as text, plays as speech, and triggers Live2D.
 
-**Exit:** A response can appear as text, play as speech, and trigger a visible
-Live2D reaction.
+## Milestone 6 — Live companion events
 
-## Milestone 5 — Events and first game connector
+- Event simulator, cooldowns, deduplication, priority, and bounded queues
+- First read-only game connector with lifecycle and reconnect behavior
+- Full-session tuning for silence versus commentary
 
-- [ ] Add an event simulator to the interface.
-- [ ] Add cooldowns, deduplication, priority, and a bounded event queue.
-- [ ] Choose the first game based on available logs, modding hooks, telemetry, or
-  APIs.
-- [ ] Implement one read-only connector for that game.
-- [ ] Translate game-specific observations into the common event envelope.
-- [ ] Provide start, stop, connection status, and reconnect behavior.
-- [ ] Test a complete play session and tune silence versus commentary.
+**Exit:** One game causes timely reactions without flooding the player.
 
-**Exit:** At least one real game can cause timely spoken and animated reactions
-without flooding the player with commentary.
+## Milestone 7 — Capabilities and permission gates
 
-## Milestone 6 — Reliability and v0.1 release
-
-- [ ] Prevent provider or adapter failures from crashing the host.
-- [ ] Add bounded retries and visible error states.
-- [ ] Redact secrets from errors and logs.
-- [ ] Add export and import for safe character profiles.
-- [ ] Add a first-run setup flow.
-- [ ] Verify fresh installation instructions on Windows.
-- [ ] Add meaningful tests for provider contracts, persistence, queues, and
-  configuration validation.
-- [ ] Document known limitations and data locations.
-- [ ] Tag `v0.1.0` after the full user journey passes.
-
-**Exit:** The First Habitat user journey works from a fresh clone and survives
-ordinary provider, avatar, and game-connector interruptions.
-
-## After v0.1
-
-### v0.2 — Workshop
-
-- Sandboxed file and coding tools
-- Git inspection and test execution
-- Image-generation adapters
-- Allow, ask, and deny permission policies
-- Per-run step, time, and spending budgets
+- Sandboxed coding and drawing capabilities
+- Allow, ask, and deny policies
 - Reviewable artifacts and approvals
+- Per-run time, step, and spending limits
 
-### v0.3 — Growth
+**Exit:** An inhabitant produces useful work while consequential actions remain
+reviewable and bounded.
 
-- Scheduled wake cycles
-- Goals, interests, and personal journals
-- Reflection over sourced memories
+## Milestone 8 — Growth
+
+- Scheduled wake cycles, goals, interests, journals, and sourced reflections
 - Bounded self-directed activities
 - User-visible correction and forgetting controls
 
-### v0.4 — Shared Terrarium
+**Exit:** An inhabitant safely chooses, completes, records, and stops a small
+activity within its limits.
 
-- Inhabitant-to-inhabitant conversations
-- Collaboration and handoffs
-- Shared and private memories
-- Speaking and activity coordination
-- Multiple simultaneous avatars
+## Later habitats
 
-### v1.0 — Portable Terrarium
+- Inhabitant collaboration and shared/private memories
+- Multiple avatars, singing, and additional expression modules
+- Satellite runtimes and embedded embodiment bridges
+- Multiple games and packaged Windows, Linux, and macOS releases
+- Encrypted backup, optional synchronization, and importable habitats
 
-- Packaged desktop application
-- 2D and 3D avatar adapters
-- Multiple game connectors
-- Mature coding, art, research, and streaming tools
-- Encrypted backup and optional synchronization
-- Importable character and habitat packages
+## Explicitly outside early milestones
 
-## Explicitly outside v0.1
-
-The following are valuable, but are excluded from the first complete version to
-keep it achievable:
-
-- unrestricted autonomous operation;
-- computer control;
-- publishing or messaging external users;
-- local image generation;
-- full coding-agent behavior;
-- 3D avatar support;
-- cloud synchronization;
-- multiple games; and
-- automatic personality rewriting.
+- unrestricted autonomy;
+- direct low-level motor control;
+- unreviewed publishing or messaging;
+- automatic personality rewriting;
+- a universal third-party plugin marketplace; and
+- cloud sync before local persistence is trustworthy.
 
