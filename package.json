@@ -6,6 +6,7 @@
   "scripts": {
     "demo": "node src/index.js --demo",
     "start": "node src/index.js",
-    "test": "node --test"
+    "test": "node --test",
+    "check": "node src/check-provider.js"
   }
 }

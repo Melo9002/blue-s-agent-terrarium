@@ -1,3 +1,5 @@
+import { validateReaction } from "./reaction.js";
+
 export class AgentRuntime {
   constructor(provider) {
     this.provider = provider;
@@ -12,13 +14,16 @@ export class AgentRuntime {
       };
     }
 
-    const response = await this.provider.generate({ agent, event });
+    const startedAt = performance.now();
+    const reaction = validateReaction(await this.provider.generate({ agent, event }));
 
     return {
       agent: agent.name,
-      status: "responded",
+      status: reaction.shouldSpeak ? "responded" : "silent",
       eventId: event.id,
-      ...response,
+      provider: this.provider.name,
+      latencyMs: Math.round(performance.now() - startedAt),
+      ...reaction,
     };
   }
 }

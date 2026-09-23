@@ -5,11 +5,12 @@ export class MockProvider {
 
   async generate({ agent, event }) {
     const text = event.payload.text ?? JSON.stringify(event.payload);
-
     return {
+      shouldSpeak: true,
       text: `${agent.name} observed “${text}” and wants to respond.`,
       emotion: event.importance >= 0.8 ? "surprised" : "curious",
-      provider: this.name,
+      animation: event.importance >= 0.8 ? "react" : null,
+      memoryCandidates: [],
     };
   }
 }

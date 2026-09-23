@@ -5,3 +5,11 @@ node_modules/
 data/
 dist/
 *.log
+
+# Local AI assistant instructions and state
+AGENTS.md
+**/AGENTS.md
+.codex/
+**/.codex/
+.agents/
+**/.agents/

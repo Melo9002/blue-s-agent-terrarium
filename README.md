@@ -73,11 +73,12 @@ The repository currently contains the first executable core prototype:
 - PixiHex and Basilisk character profiles;
 - a shared event schema;
 - configurable reaction thresholds;
-- a provider boundary with a zero-cost mock implementation;
+- a provider boundary with Mock, Groq, and Ollama implementations;
+- validated structured reactions for speech, emotion, animation, and memory;
 - a terminal demonstration; and
 - tests for important-event delivery and noise suppression.
 
-No real model, game, avatar, or voice service is connected yet.
+Groq and Ollama adapters are implemented but still require live connectivity checks. No game, avatar, memory database, or voice service is connected yet.
 
 ## Run the prototype
 
@@ -97,18 +98,17 @@ node src/index.js
 
 ## Roadmap
 
-1. Provider-neutral structured reactions
-2. OpenAI and Gemini text adapters
-3. SQLite-backed runs and memory
-4. Local management interface
-5. Voice and VTube Studio integration
-6. First real game connector
-7. Sandboxed coding and image-generation tools
-8. Scheduled bounded activity
-9. Optional desktop packaging and encrypted cloud synchronization
+The first complete release focuses on a working local habitat: real conversation,
+provider switching, persistent memory, selective game reactions, local speech,
+and Live2D expressions. Coding, art, and bounded autonomous activity follow on
+top of that foundation.
+
+See the [detailed roadmap](docs/ROADMAP.md) for milestones and completion criteria.
 
 ## Project stage
 
 Blue's Agent Terrarium is an early personal experiment. Its architecture and
 terminology will evolve as the first inhabitants begin using real tools and
 interacting with live environments.
+
+
