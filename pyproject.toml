@@ -1,0 +1,40 @@
+[project]
+name = "blues-agent-terrarium"
+version = "0.1.0"
+description = "A native platform for creating, cultivating, and running persistent AI characters."
+readme = "README.md"
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "httpx>=0.28,<1",
+    "pydantic>=2.12,<3",
+    "pydantic-settings>=2.11,<3",
+    "pyside6>=6.10,<7",
+]
+
+[project.scripts]
+agent-terrarium = "agent_terrarium.main:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4,<9",
+    "pytest-cov>=7,<8",
+    "ruff>=0.13,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_terrarium"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blue's Agent Terrarium</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">LOCAL HABITAT</p>
+        <h1>Blue's Agent Terrarium</h1>
+        <p class="subtitle">A small place for curious digital inhabitants.</p>
+      </div>
+      <div class="provider-pill"><span class="pulse"></span><span id="provider">Connecting…</span></div>
+    </header>
+
+    <section>
+      <div class="section-heading">
+        <div><p class="eyebrow">INHABITANTS</p><h2>Who should observe?</h2></div>
+        <button id="select-all" class="text-button" type="button">Select both</button>
+      </div>
+      <div id="agents" class="agent-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="composer">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">NEW EVENT</p><h2>What happened?</h2></div>
+        <output id="importance-output">Importance 0.7</output>
+      </div>
+      <form id="event-form">
+        <textarea id="event-text" rows="3" maxlength="1000" placeholder="Say hi, discover a cave, or describe something from the game…" required></textarea>
+        <div class="controls">
+          <label>Quiet <input id="importance" type="range" min="0" max="1" step="0.1" value="0.7"> Urgent</label>
+          <button id="send" type="submit">Release event</button>
+        </div>
+      </form>
+    </section>
+
+    <section>
+      <div class="section-heading compact">
+        <div><p class="eyebrow">OBSERVATIONS</p><h2>Recent reactions</h2></div>
+        <button id="clear" class="text-button" type="button">Clear</button>
+      </div>
+      <div id="empty-state" class="empty-state">The habitat is quiet. Send an event when you're ready.</div>
+      <div id="reactions" class="reaction-list" aria-live="polite"></div>
+    </section>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
