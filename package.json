@@ -1,0 +1,11 @@
+{
+  "name": "blues-agent-terrarium",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo": "node src/index.js --demo",
+    "start": "node src/index.js",
+    "test": "node --test"
+  }
+}
