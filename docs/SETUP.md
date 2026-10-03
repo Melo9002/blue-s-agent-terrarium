@@ -40,6 +40,9 @@ uv run agent-terrarium
 PySide6 is installed as a project dependency; a separate Qt installation is not
 required. Node.js, npm, Rust, Tauri, Docker, and a database server are not needed.
 
+Ollama and Qwen are optional until the local-provider adapter is implemented.
+See `LOCAL-MODELS.md` for installation, storage, and verification instructions.
+
 ## Secrets and local data
 
 Put future provider keys only in a local `.env` file. The repository ignores

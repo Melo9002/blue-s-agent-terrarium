@@ -59,6 +59,15 @@ uv run agent-terrarium
 Type a message and press Enter. The mock provider responds without internet or
 API credits. Type `quit` to exit.
 
+Basilisk is active by default. Select PixiHex, several inhabitants, or everyone
+with:
+
+```powershell
+uv run agent-terrarium --inhabitant pixihex
+uv run agent-terrarium -i basilisk -i pixihex
+uv run agent-terrarium --inhabitant all
+```
+
 ## Development checks
 
 ```powershell
@@ -88,6 +97,8 @@ Input connectors -> typed events -> inhabitant runtime -> model provider
 
 - [`docs/TASKS.md`](docs/TASKS.md) — active, checkable work board
 - [`docs/PROJECT-BRIEF.md`](docs/PROJECT-BRIEF.md) — product decisions
+- [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) — agreed behavior and acceptance criteria
+- [`docs/LOCAL-MODELS.md`](docs/LOCAL-MODELS.md) — Ollama and Qwen setup
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — milestone sequence
 - [`docs/SETUP.md`](docs/SETUP.md) — additional environment notes
 - [`docs/AT-HOME-TEST.md`](docs/AT-HOME-TEST.md) — verification checklist

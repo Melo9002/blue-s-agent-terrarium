@@ -27,7 +27,11 @@ files, Git, microphones, games, avatars, GPUs, and streaming software.
 - Use deterministic code for permissions, timing, queues, budgets, and safety.
 - Use models for language, interpretation, planning, and creative work.
 - Keep each inhabitant's history, memories, goals, and permissions isolated.
+- Keep installed inhabitants separate from which inhabitants are currently
+  enabled or active; archiving an inhabitant must not silently delete its data.
 - Keep a mock provider for offline development and automated tests.
+- Prefer GPT for configured high-capability cloud work and Qwen through Ollama
+  as the first local/offline model family.
 - Extract general module contracts only after real modules reveal the seams.
 
 ## Module families
@@ -66,4 +70,3 @@ recoverable from commit `eb32a35` (`the great python reset`).
 
 Create the first PySide6 window and connect it to the existing runtime and mock
 provider. The milestone ends when Basilisk can answer `Hi` without the terminal.
-

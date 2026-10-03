@@ -29,6 +29,9 @@ receive a validated response from the mock provider.
 - [ ] Add tests for ignored events and spoken reactions.
 - [ ] Add clear errors for malformed events and provider responses.
 - [ ] Move inhabitant definitions from Python source into validated data files.
+- [x] Select one or several active inhabitants in the terminal prototype.
+- [ ] Track installed, enabled, disabled, and archived inhabitants separately.
+- [ ] Add, edit, enable, disable, and archive inhabitants through the native UI.
 - [ ] Keep conversation history isolated per inhabitant in memory.
 
 **Done when:** The core can be tested without opening a window or contacting a
@@ -61,10 +64,17 @@ hers, even before a real model is connected.
 
 ### 5. Connect the first real model
 
+- [x] Choose local Qwen through Ollama as BAT's offline model family.
 - [ ] Implement the Python Ollama provider adapter.
+- [ ] Use `qwen3.5:4b` as the initial local model.
+- [ ] Support `qwen3.5:2b` as an optional low-resource fallback.
 - [ ] Add provider selection to configuration.
+- [ ] Show the active provider and model in the interface.
+- [ ] Detect an unavailable Ollama service or missing model.
 - [ ] Add timeout and connection-error handling.
 - [ ] Validate and safely reject malformed model output.
+- [ ] Record provider, model, and latency for each run.
+- [ ] Make automatic cloud-to-local fallback optional and visible.
 - [ ] Test with a small local model.
 - [ ] Keep the mock provider as the offline default for tests.
 
@@ -115,4 +125,3 @@ modifying it.
 - Treat identity, capabilities, providers, and bodies as separate.
 - Require approval for consequential external actions.
 - Every completed task should leave tests, documentation, or visible behavior.
-

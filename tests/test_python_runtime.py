@@ -3,6 +3,7 @@ import unittest
 from pydantic import ValidationError
 
 from agent_terrarium.inhabitants import INHABITANTS
+from agent_terrarium.main import select_inhabitants
 from agent_terrarium.models import Event, Reaction
 from agent_terrarium.providers import MockProvider
 from agent_terrarium.runtime import AgentRuntime
@@ -46,6 +47,15 @@ class RuntimeTests(unittest.TestCase):
     def test_silent_reaction_cannot_contain_text(self) -> None:
         with self.assertRaises(ValidationError):
             Reaction(should_speak=False, text="Hi", emotion="quiet")
+
+    def test_basilisk_is_the_default_active_inhabitant(self) -> None:
+        selected = select_inhabitants(None)
+
+        self.assertEqual([inhabitant.id for inhabitant in selected], ["basilisk"])
+
+    def test_inhabitants_can_be_selected_individually_or_together(self) -> None:
+        self.assertEqual(select_inhabitants(["pixihex"]), [INHABITANTS["pixihex"]])
+        self.assertEqual(select_inhabitants(["all"]), list(INHABITANTS.values()))
 
 
 if __name__ == "__main__":

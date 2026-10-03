@@ -22,3 +22,8 @@ __pycache__/
 .ruff_cache/
 .coverage
 htmlcov/
+
+# Local model weights are managed by Ollama, never Git
+models/
+*.gguf
+*.safetensors
